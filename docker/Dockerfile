@@ -41,23 +41,37 @@ RUN pip install Pillow
 
 # ========== OpenAI Gym ==========
 RUN apt-get -y install libgtk2.0-0
-RUN pip install gym
 #RUN apt-get -y install ffmpeg
 RUN apt-get -y install libav-tools
 CMD alias ffmpeg="avconv"
 
-# ========== Add codebase stub ==========
+# ========== GIT: OpenAI Gym and RLLAB ==========
 CMD mkdir /root/code
-ADD environment.yml /root/code/environment.yml
-RUN conda env create -f /root/code/environment.yml
+CMD mkdir /root/git
 
-ENV PYTHONPATH /root/code/rllab:$PYTHONPATH
+RUN git clone https://github.com/jonasnm/rllab.git /root/git/rllab
+RUN git clone -b jonas-experimental https://github.com/jonasnm/gym.git /root/git/gym
+
+
+ENV PYTHONPATH /root/git/rllab:$PYTHONPATH
 ENV PATH /opt/conda/envs/rllab3/bin:$PATH
+
 RUN echo "source activate rllab3" >> /root/.bashrc
 ENV BASH_ENV /root/.bashrc
+RUN ./root/git/rllab/scripts/setup_linux.sh
+RUN pip install -e /root/git/gym/
 WORKDIR /root/code
 
-# gpu theanno
-ENV THEANO_FLAGS mode=FAST_RUN,device=gpu,floatX=float32
+# cpu theano
+ENV THEANO_FLAGS mode=FAST_RUN,device=cpu,floatX=float32
 
+# Downgrading Lasagne due to theano compatibility issue
+run pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
 
+COPY ./conda_script.sh /root/code/
+RUN chmod +x /root/code/conda_script.sh
+RUN /root/code/conda_script.sh
+
+# Changing to nomkl
+#RUN conda install nomkl numpy scipy scikit-learn numexpr
+#RUN conda remove mkl mkl-service
