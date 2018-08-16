@@ -3,7 +3,12 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rllab/rllab/blob/master/LICENSE)
 [![Join the chat at https://gitter.im/rllab/rllab](https://badges.gitter.im/rllab/rllab.svg)](https://gitter.im/rllab/rllab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-# rllab
+# rllab -- NOTE: This is a fork!
+
+- The Dockerfile has been modified to accept the Diabetes version of the
+  OpenAI gym.
+- Due to some (unknown at the moment) issues a NOMKL version of numpy
+  and scipy has to be used. This is configured in the dockerfile.
 
 rllab is a framework for developing and evaluating reinforcement learning algorithms. It includes a wide range of continuous control tasks plus implementations of the following algorithms:
 
