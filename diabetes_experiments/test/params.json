@@ -1,0 +1,67 @@
+{
+  "args_data": "gANjcmxsYWIubWlzYy5pbnN0cnVtZW50ClN0dWJNZXRob2RDYWxsCnEAKYFxAX1xAihYCAAAAF9fa3dhcmdzcQN9cQRYBgAAAF9fYXJnc3EFKGNybGxhYi5taXNjLmluc3RydW1lbnQKU3R1Yk9iamVjdApxBimBcQd9cQgoWAsAAABwcm94eV9jbGFzc3EJY3JsbGFiLmFsZ29zLnZwZwpWUEcKcQpYBgAAAGt3YXJnc3ELfXEMKFgJAAAAc3RlcF9zaXplcQ1HP4R64UeuFHtYBQAAAG5faXRycQ5LyFgDAAAAZW52cQ9oBimBcRB9cREoaAljcmxsYWIuZW52cy5ub3JtYWxpemVkX2VudgpOb3JtYWxpemVkRW52CnESaAt9cRNoD2gGKYFxFH1xFShoCWNybGxhYi5lbnZzLmd5bV9lbnYKR3ltRW52CnEWaAt9cRdYCAAAAGVudl9uYW1lcRhYEgAAAEhvdm9ya2FJbnRlcnZhbC12MHEZc1gEAAAAYXJnc3EaKXVic2gaKXViWAYAAABwb2xpY3lxG2gGKYFxHH1xHShoCWNybGxhYi5wb2xpY2llcy5nYXVzc2lhbl9tbHBfcG9saWN5CkdhdXNzaWFuTUxQUG9saWN5CnEeaAt9cR8oWAgAAABpbml0X3N0ZHEgSwFYCQAAAGxlYXJuX3N0ZHEhiFgMAAAAaGlkZGVuX3NpemVzcSJLZEsySxmHcSNYCAAAAGVudl9zcGVjcSRjcmxsYWIubWlzYy5pbnN0cnVtZW50ClN0dWJBdHRyCnElKYFxJn1xJyhYCgAAAF9hdHRyX25hbWVxKFgEAAAAc3BlY3EpWAQAAABfb2JqcSpoEHVidWgaKXViWAgAAABiYXNlbGluZXEraAYpgXEsfXEtKGgJY3JsbGFiLmJhc2VsaW5lcy5saW5lYXJfZmVhdHVyZV9iYXNlbGluZQpMaW5lYXJGZWF0dXJlQmFzZWxpbmUKcS5oC31xL2gkaCUpgXEwfXExKGgoaCloKmgQdWJzaBopdWJYCgAAAGJhdGNoX3NpemVxMk2gD1gIAAAAZGlzY291bnRxM0c/764UeuFHrnVoGil1YlgFAAAAdHJhaW5xNCl9cTV0cTZ1Yi4=",
+  "exp_name": "reinforceHovorkaInterval-v0_2018_08_21_10_43_50_0002",
+  "json_args": {
+    "algo": {
+      "_name": "rllab.algos.vpg.VPG",
+      "batch_size": 4000,
+      "discount": 0.99,
+      "n_itr": 200,
+      "step_size": 0.01
+    },
+    "baseline": {
+      "_name": "rllab.baselines.linear_feature_baseline.LinearFeatureBaseline",
+      "env_spec": {
+        "attr": "spec",
+        "obj": {
+          "_name": "rllab.envs.normalized_env.NormalizedEnv",
+          "env": {
+            "_name": "rllab.envs.gym_env.GymEnv",
+            "env_name": "HovorkaInterval-v0"
+          }
+        }
+      }
+    },
+    "env": {
+      "_name": "rllab.envs.normalized_env.NormalizedEnv",
+      "env": {
+        "_name": "rllab.envs.gym_env.GymEnv",
+        "env_name": "HovorkaInterval-v0"
+      }
+    },
+    "policy": {
+      "_name": "rllab.policies.gaussian_mlp_policy.GaussianMLPPolicy",
+      "env_spec": {
+        "attr": "spec",
+        "obj": {
+          "_name": "rllab.envs.normalized_env.NormalizedEnv",
+          "env": {
+            "_name": "rllab.envs.gym_env.GymEnv",
+            "env_name": "HovorkaInterval-v0"
+          }
+        }
+      },
+      "hidden_sizes": [
+        100,
+        50,
+        25
+      ],
+      "init_std": 1,
+      "learn_std": true
+    }
+  },
+  "log_dir": "test",
+  "log_tabular_only": false,
+  "n_parallel": 1,
+  "params_log_file": "params.json",
+  "plot": false,
+  "resume_from": null,
+  "seed": 1,
+  "snapshot_gap": 1,
+  "snapshot_mode": "last",
+  "tabular_log_file": "progress.csv",
+  "text_log_file": "debug.log",
+  "use_cloudpickle": false,
+  "variant_data": null,
+  "variant_log_file": "variant.json"
+}
