@@ -11,12 +11,14 @@ from pylab import plot, figure, show, title, ion, \
 env = normalize(GymEnv('HovorkaInterval-v0'))
 # env = (GymEnv('HovorkaDiabetes-v0'))
 
+env.wrapped_env.env.env.reward_flag = 'gaussian'
+
 policy = GaussianMLPPolicy(
     env_spec=env.spec,
     # The neural network policy should have two hidden layers, each with 32 hidden units.
     # hidden_sizes=(32, 32),
     hidden_sizes=(100, 50, 25),
-    learn_std=False,
+    learn_std=True,
     init_std=.0001
 )
 baseline = LinearFeatureBaseline(env_spec=env.spec)

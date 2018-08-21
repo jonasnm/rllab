@@ -1,33 +1,47 @@
-import argparse
-
 import joblib
-# import tensorflow as tf
-
-from rllab.misc.console import query_yes_no
 from rllab.sampler.utils import rollout
+import matplotlib.pyplot as plt
+import numpy as np
 
-if __name__ == "__main__":
+try:
+    import seaborn as sns
+    sns.set()
+except ImportError:
+    print('\nConsider installing seaborn for better plotting!')
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('file', type=str,
-                        help='path to the snapshot file')
-    parser.add_argument('--max_path_length', type=int, default=1000,
-                        help='Max length of rollout')
-    parser.add_argument('--speedup', type=float, default=1,
-                        help='Speedup')
-    args = parser.parse_args()
+def render_and_plot_policy(filename):
 
-    # If the snapshot file use tensorflow, do:
-    # import tensorflow as tf
-    # with tf.Session():
-    #     [rest of the code]
-    # with tf.Session() as sess:
-    data = joblib.load(args.file)
+    data = joblib.load(filename)
     policy = data['policy']
     env = data['env']
-    while True:
-        path = rollout(env, policy, max_path_length=args.max_path_length,
-                       animated=True, speedup=args.speedup)
-        if not query_yes_no('Continue simulation?'):
-            break
+    algo = data['algo']
+
+    path = rollout(env, policy, max_path_length=96,
+                       animated=True, speedup=1, always_return_paths=True)
+
+
+    bg_history = [path['observations'][i][0:29] for i in range(len(path['observations']))]
+    bg_history = np.concatenate(bg_history).ravel()
+
+    plt.figure()
+    plt.ion()
+    plt.subplot(2, 2, 1)
+    plt.plot(bg_history)
+    plt.title('Result of running the algorithm')
+
+    plt.subplot(2, 2, 3)
+    plt.plot(path['rewards'])
+    plt.title('Reward')
+
+    plt.subplot(2, 2, 4)
+    plt.plot(path['actions'])
+    plt.title('Actions')
+
+
+    hidden_sizes = str(policy.get_param_shapes())
+    plt.suptitle('Reinforce algorithm, batch size: {}, # iters: {} and gamma: {}. \n NN policy architecture: {}, \n reward fn: {}'.
+                 format(algo.batch_size, algo.n_itr, algo.discount, hidden_sizes, env.wrapped_env.env.env.env.reward_flag))
+    # suptitle('Reinforce')
+    plt.show()
+
 
