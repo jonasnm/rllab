@@ -10,6 +10,11 @@
 - Due to some (unknown at the moment) issues a NOMKL version of numpy
   and scipy has to be used. This is configured in the dockerfile.
 
+# Diabetes experiments
+
+- Experiment scripts and python functions are located in
+  ./diabetes_experiments. 
+
 rllab is a framework for developing and evaluating reinforcement learning algorithms. It includes a wide range of continuous control tasks plus implementations of the following algorithms:
 
 

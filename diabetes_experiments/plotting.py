@@ -7,6 +7,58 @@ try:
 except ImportError:
     print('\nConsider installing seaborn for better plotting!')
 
+def test_and_plot(env, algo):
+    ''' Testing the policy, plotting the result
+    and saving the figure
+    '''
+    ## Testing the policy
+    from pylab import plot, figure, show, title, ion, \
+         subplot, suptitle
+
+    reward = []
+    actions = []
+
+    s = env.reset()
+
+    # done = False
+
+    # TODO: Does not work with so-called stub experiments I believe...
+    # Testing the algorithm
+    # while not done:
+    for i in range(96):
+
+        # Get action recommended by policy
+        action = algo.policy.get_action(s)
+
+        # Take the action
+        s, r, done, info = env.step(action[0])
+
+        # Check reward and what action was taken
+        reward.append(r)
+        actions.append(action[0])
+
+
+    # Plotting
+    figure()
+    ion()
+    subplot(2, 2, 1)
+    plot(env.wrapped_env.env.env.bg_history)
+    title('Result of running the algorithm')
+
+    subplot(2, 2, 3)
+    plot(reward)
+    title('Reward')
+
+    subplot(2, 2, 4)
+    plot(actions)
+    title('Actions')
+
+
+    suptitle('Reinforce algorithm, batch size: {}, # iters: {} and gamma: {}. \n NN policy architecture: {}, reward fn: {}'.format(batch_size, n_itr, gamma, hidden_sizes, reward_fun))
+    # suptitle('Reinforce')
+    show()
+
+
 def bgplot(blood_glucose_level, block=False):
     """
     Plotting the blood glucose curve

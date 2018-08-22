@@ -16,7 +16,6 @@ from sandbox.rocky.tf.policies.gaussian_mlp_policy import GaussianMLPPolicy
 import gym
 # env = gym.make('HovorkaDiabetes-v0')
 env = 'HovorkaDiabetes-v0'
-# env = 'MinimalDiabetes-v0'
 
 gymenv = GymEnv(env, force_reset=True, record_video=False, record_log=True)
 

@@ -8,16 +8,18 @@ from rllab.policies.gaussian_mlp_policy import GaussianMLPPolicy
 from pylab import plot, figure, show, title, ion, \
      subplot, suptitle
 
-env = normalize(GymEnv('HovorkaDiabetes-v0'))
+env = normalize(GymEnv('HovorkaInterval-v0'))
 # env = (GymEnv('HovorkaDiabetes-v0'))
+
+env.wrapped_env.env.env.reward_flag = 'gaussian'
 
 policy = GaussianMLPPolicy(
     env_spec=env.spec,
     # The neural network policy should have two hidden layers, each with 32 hidden units.
-    hidden_sizes=(32, 32),
-    # hidden_sizes=(100, 50, 25),
+    # hidden_sizes=(32, 32),
+    hidden_sizes=(100, 50, 25),
     learn_std=True,
-    # init_std=.001
+    init_std=.0001
 )
 baseline = LinearFeatureBaseline(env_spec=env.spec)
 
@@ -49,7 +51,7 @@ s = env.reset()
 
 # Testing the algorithm
 # while not done:
-for i in range(1000):
+for i in range(48):
 
     # Get action recommended by policy
     action = algo.policy.get_action(s)
@@ -81,7 +83,9 @@ batch_size = str(algo.batch_size)
 n_itr = str(algo.n_itr)
 gamma = str(algo.discount)
 
-suptitle('TRPO algorithm, batch size: {}, # iters: {} and gamma: {}. \n NN policy architecture: {}'.format(batch_size, n_itr, gamma, hidden_sizes))
+
+suptitle('TRPO algorithm, batch size: {}, # iters: {} and gamma: {}.'.format(batch_size, n_itr, gamma))
+# suptitle('TRPO algorithm, batch size: {}, # iters: {} and gamma: {}. \n NN policy architecture: {}'.format(batch_size, n_itr, gamma, hidden_arc))
 # suptitle('Reinforce')
 show()
 
