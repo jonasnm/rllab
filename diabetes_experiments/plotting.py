@@ -22,6 +22,7 @@ def test_and_plot(env, algo):
 
     # done = False
 
+    # TODO: Does not work with so-called stub experiments I believe...
     # Testing the algorithm
     # while not done:
     for i in range(96):
