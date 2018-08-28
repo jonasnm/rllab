@@ -1,4 +1,4 @@
-from rllab.algos.vpg import VPG
+from rllab.algos.tnpg import TNPG
 from rllab.baselines.linear_feature_baseline import LinearFeatureBaseline
 from rllab.envs.gym_env import GymEnv
 from rllab.envs.normalized_env import normalize
@@ -20,13 +20,13 @@ except ImportError:
 def run_task(*_):
     env = normalize(GymEnv('HovorkaInterval-v0'))
     # env.wrapped_env.env.env.env.reward_flag = 'absolute'
-    env.wrapped_env.env.env.reward_flag = 'absolute'
+    env.wrapped_env.env.env.reward_flag = 'gaussian'
 
 
     baseline = LinearFeatureBaseline(env_spec=env.spec)
 
     learn_std = True
-    init_std=2
+    init_std=1
 
     # hidden_sizes=(8,)
     hidden_sizes=(32, 32)
@@ -43,11 +43,11 @@ def run_task(*_):
     # Defining the algorithm
     # =======================
     batch_size = 5000
-    n_itr = 2
+    n_itr = 200
     gamma = .9
     step_size = 0.01
 
-    algo = VPG(
+    algo = TNPG(
         env=env,
         policy=policy,
         baseline=baseline,
@@ -60,11 +60,12 @@ def run_task(*_):
 
     return algo
 
-# data_dir = 'VPG_default'
-# PROJECT_PATH = '/Users/jonas/Dropbox/results/miguel_experiments/'
-# log_dir = PROJECT_PATH + data_dir
-log_dir='./'
 
+# log_dir = '~/Dropbox/results/jonas_experiments/no_stub/'
+DROPBOX_DIR = '/home/jonas/Dropbox/results/jonas_experiments/'
+# log_dir = DROPBOX_DIR + 'tnpg/gaussian/5000/8'
+log_dir = DROPBOX_DIR + 'tnpg/gaussian/5000/32_32'
+# log_dir = DROPBOX_DIR + 'tnpg/gaussian/5000/100_50_25'
 # Running and saving the experiment
 run_experiment_lite(
     run_task,
@@ -76,33 +77,9 @@ run_experiment_lite(
     snapshot_mode="last",
     # Specifies the seed for the experiment. If this is not provided, a random seed
     # will be used
-    # exp_prefix="Reinforce_" + env_name,
+    # exp_prefix="TNPG_" + '32_32_',
     # exp_prefix=data_dir
-    seed=1,
-    mode="local",
-    plot=False,
+    plot=False
 )
-
-## Testing the policy
-# filename = log_dir + '/params.pkl'
-# figure_filename = data_dir + '.png'
-
-# log_dir = '~/Dropbox/results/jonas_experiments/no_stub/'
-# log_dir = './temp_testing'
-# # Running and saving the experiment
-# run_experiment_lite(
-    # run_task,
-    # # algo.train(),
-    # log_dir=log_dir,
-    # # n_parallel=2,
-    # n_parallel=1,
-    # # Only keep the snapshot parameters for the last iteration
-    # snapshot_mode="last",
-    # # Specifies the seed for the experiment. If this is not provided, a random seed
-    # # will be used
-    # # exp_prefix="Reinforce_" + env_name,
-    # # exp_prefix=data_dir
-    # plot=False
-# )
 
 

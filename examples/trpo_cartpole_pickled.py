@@ -23,7 +23,7 @@ def run_task(*_):
         baseline=baseline,
         batch_size=4000,
         max_path_length=100,
-        n_itr=1000,
+        n_itr=10,
         discount=0.99,
         step_size=0.01,
         # Uncomment both lines (this and the plot parameter below) to enable plotting
@@ -36,6 +36,7 @@ run_experiment_lite(
     run_task,
     # Number of parallel workers for sampling
     n_parallel=2,
+    log_dir='./',
     # Only keep the snapshot parameters for the last iteration
     snapshot_mode="last",
     # Specifies the seed for the experiment. If this is not provided, a random seed

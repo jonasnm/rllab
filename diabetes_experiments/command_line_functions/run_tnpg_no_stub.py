@@ -1,8 +1,10 @@
-from rllab.algos.vpg import VPG
+import argparse
+
+from rllab.algos.tnpg import TNPG
+from rllab.policies.gaussian_mlp_policy import GaussianMLPPolicy
 from rllab.baselines.linear_feature_baseline import LinearFeatureBaseline
 from rllab.envs.gym_env import GymEnv
 from rllab.envs.normalized_env import normalize
-from rllab.policies.gaussian_mlp_policy import GaussianMLPPolicy
 from rllab.misc.instrument import run_experiment_lite
 
 try:
@@ -11,6 +13,20 @@ try:
 except ImportError:
     print('\nConsider installing seaborn (pip install seaborn) for better plotting!')
 
+# Parsing arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("env", help="The environment name from OpenAIGym environments")
+parser.add_argument("--reward", default='gaussian', help="The reward function from OpenAIGym diabetes environment")
+parser.add_argument("--n_itr", default=200, type=int)
+parser.add_argument("--step_size", default=0.01)
+parser.add_argument("--batch_size", default=5000)
+parser.add_argument("--gamma", default=.9)
+parser.add_argument("--hidden_sizes", default=1, type=int)
+parser.add_argument("--data_dir", default="./data_tnpg/")
+parser.add_argument("--learn_std", default=True)
+parser.add_argument("--init_std", default=1)
+
+args = parser.parse_args()
 
 # ==========================================================================
 # OpenAI diabetes envs - HovorkaInterval starts at the same value every time,
@@ -18,19 +34,21 @@ except ImportError:
 # ==========================================================================
 
 def run_task(*_):
-    env = normalize(GymEnv('HovorkaInterval-v0'))
-    # env.wrapped_env.env.env.env.reward_flag = 'absolute'
-    env.wrapped_env.env.env.reward_flag = 'absolute'
+    env = normalize(GymEnv(args.env))
+    env.wrapped_env.env.env.reward_flag = args.reward
 
 
     baseline = LinearFeatureBaseline(env_spec=env.spec)
 
-    learn_std = True
-    init_std=2
+    learn_std = args.learn_std
+    init_std = args.init_std
 
-    # hidden_sizes=(8,)
-    hidden_sizes=(32, 32)
-    # hidden_sizes=(100, 50, 25)
+    if args.hidden_sizes == 0:
+        hidden_sizes=(8,)
+    elif args.hidden_sizes == 1:
+        hidden_sizes=(32, 32)
+    elif args.hidden_sizes == 2:
+        hidden_sizes=(100, 50, 25)
 
     policy = GaussianMLPPolicy(
         env_spec=env.spec,
@@ -42,12 +60,12 @@ def run_task(*_):
     # =======================
     # Defining the algorithm
     # =======================
-    batch_size = 5000
-    n_itr = 2
-    gamma = .9
-    step_size = 0.01
+    batch_size = args.batch_size
+    n_itr = args.n_itr
+    gamma = args.gamma
+    step_size = args.step_size
 
-    algo = VPG(
+    algo = TNPG(
         env=env,
         policy=policy,
         baseline=baseline,
@@ -58,51 +76,21 @@ def run_task(*_):
     )
     algo.train()
 
-    return algo
-
-# data_dir = 'VPG_default'
-# PROJECT_PATH = '/Users/jonas/Dropbox/results/miguel_experiments/'
-# log_dir = PROJECT_PATH + data_dir
-log_dir='./'
 
 # Running and saving the experiment
 run_experiment_lite(
     run_task,
     # algo.train(),
-    log_dir=log_dir,
+    log_dir=args.data_dir,
     # n_parallel=2,
     n_parallel=1,
     # Only keep the snapshot parameters for the last iteration
     snapshot_mode="last",
     # Specifies the seed for the experiment. If this is not provided, a random seed
     # will be used
-    # exp_prefix="Reinforce_" + env_name,
+    exp_prefix="TNPG_" + str(args.hidden_sizes),
     # exp_prefix=data_dir
-    seed=1,
-    mode="local",
-    plot=False,
+    plot=False
 )
-
-## Testing the policy
-# filename = log_dir + '/params.pkl'
-# figure_filename = data_dir + '.png'
-
-# log_dir = '~/Dropbox/results/jonas_experiments/no_stub/'
-# log_dir = './temp_testing'
-# # Running and saving the experiment
-# run_experiment_lite(
-    # run_task,
-    # # algo.train(),
-    # log_dir=log_dir,
-    # # n_parallel=2,
-    # n_parallel=1,
-    # # Only keep the snapshot parameters for the last iteration
-    # snapshot_mode="last",
-    # # Specifies the seed for the experiment. If this is not provided, a random seed
-    # # will be used
-    # # exp_prefix="Reinforce_" + env_name,
-    # # exp_prefix=data_dir
-    # plot=False
-# )
 
 
