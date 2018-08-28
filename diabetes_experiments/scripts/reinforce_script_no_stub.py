@@ -75,7 +75,7 @@ for k in range(len(reward_functions)):
         NN_folder = [str(j) for j in NN_sizes[i]]
         NN_folder = '_'.join(NN_folder)
 
-        log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/' + RL + reward_functions[k] + algo.batch_size + NN_folder
+        log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/' + RL + '/' + reward_functions[k] + '/' + '5000' + '/' + NN_folder
         # log_dir = './'
         # Running and saving the experiment
         run_experiment_lite(
@@ -94,7 +94,7 @@ for k in range(len(reward_functions)):
         )
 
         ## Testing the policy
-        data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/' + RL + reward_functions[k] + algo.batch_size + NN_folder + RL + '_default'
+        data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/' + RL + '/' + reward_functions[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
         filename = log_dir + '/params.pkl'
         figure_filename = data_dir + '.png'
 
