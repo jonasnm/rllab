@@ -18,98 +18,6 @@ try:
 except ImportError:
     print('\nConsider installing seaborn (pip install seaborn) for better plotting!')
 
-# ==========================================================================
-# OpenAI diabetes envs - HovorkaInterval starts at the same value every time,
-# HovorkaIntervalRandom starts at a random value
-# ==========================================================================
-
-def run_task(*_):
-    env = normalize(GymEnv('HovorkaInterval-v0'))
-    # env.wrapped_env.env.env.env.reward_flag = 'absolute'
-    env.wrapped_env.env.env.reward_flag = 'absolute'
-
-
-    baseline = LinearFeatureBaseline(env_spec=env.spec)
-
-    learn_std = True
-    init_std=2
-
-    # hidden_sizes=(8,)
-    hidden_sizes=(32, 32)
-    # hidden_sizes=(100, 50, 25)
-
-    policy = GaussianMLPPolicy(
-        env_spec=env.spec,
-        hidden_sizes=hidden_sizes,
-        learn_std=learn_std,
-        init_std=init_std
-    )
-
-    # =======================
-    # Defining the algorithm
-    # =======================
-    batch_size = 5000
-    n_itr = 2
-    gamma = .9
-    step_size = 0.01
-
-    algo = VPG(
-        env=env,
-        policy=policy,
-        baseline=baseline,
-        batch_size=batch_size,
-        n_itr=n_itr,
-        discount=gamma,
-        step_size=step_size
-    )
-    algo.train()
-
-
-# data_dir = 'VPG_default'
-# PROJECT_PATH = '/Users/jonas/Dropbox/results/miguel_experiments/'
-# log_dir = PROJECT_PATH + data_dir
-# log_dir='./'
-
-# Running and saving the experiment
-# run_experiment_lite(
-    # run_task,
-    # # algo.train(),
-    # log_dir=log_dir,
-    # # n_parallel=2,
-    # n_parallel=1,
-    # # Only keep the snapshot parameters for the last iteration
-    # snapshot_mode="last",
-    # # Specifies the seed for the experiment. If this is not provided, a random seed
-    # # will be used
-    # # exp_prefix="Reinforce_" + env_name,
-    # # exp_prefix=data_dir
-    # seed=1,
-    # mode="local",
-    # plot=False,
-# )
-
-## Testing the policy
-# filename = log_dir + '/params.pkl'
-# figure_filename = data_dir + '.png'
-
-# log_dir = '~/Dropbox/results/jonas_experiments/no_stub/'
-# log_dir = './temp_testing'
-# # Running and saving the experiment
-# run_experiment_lite(
-    # run_task,
-    # # algo.train(),
-    # log_dir=log_dir,
-    # # n_parallel=2,
-    # n_parallel=1,
-    # # Only keep the snapshot parameters for the last iteration
-    # snapshot_mode="last",
-    # # Specifies the seed for the experiment. If this is not provided, a random seed
-    # # will be used
-    # # exp_prefix="Reinforce_" + env_name,
-    # # exp_prefix=data_dir
-    # plot=False
-# )
-
 reward_functions = ('absolute', 'gaussian', 'gaussian_with_insulin' )
 NN_sizes = ((8,), (32, 32), (100, 50, 25))
 
@@ -190,4 +98,4 @@ for k in range(len(reward_functions)):
         filename = log_dir + '/params.pkl'
         figure_filename = data_dir + '.png'
 
-        render_and_plot_policy(filename, figure_filename)
+render_and_plot_policy(filename, figure_filename)
