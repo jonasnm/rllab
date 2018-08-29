@@ -54,7 +54,7 @@ for k in range(len(models)):
             # Defining the algorithm
             # =======================
             batch_size = 5000
-            n_itr = 2
+            n_itr = 200
             gamma = .99
             step_size = 0.01
             # max_path_length = 96,
