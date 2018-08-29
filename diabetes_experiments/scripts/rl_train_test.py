@@ -54,7 +54,7 @@ for k in range(len(models)):
             # Defining the algorithm
             # =======================
             batch_size = 5000
-            n_itr = 200
+            n_itr = 2
             gamma = .99
             step_size = 0.01
             # max_path_length = 96,
@@ -96,5 +96,6 @@ for k in range(len(models)):
         data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
         filename = log_dir + '/params.pkl'
         figure_filename = data_dir + '.png'
+        title = RL + '_default'
 
-        render_and_plot_policy(filename, figure_filename)
+        render_and_plot_policy(filename, figure_filename, title)
