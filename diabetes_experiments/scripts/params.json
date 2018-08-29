@@ -1,0 +1,82 @@
+{
+  "args_data": "gANjcmxsYWIubWlzYy5pbnN0cnVtZW50ClN0dWJNZXRob2RDYWxsCnEAKYFxAX1xAihYBgAAAF9fYXJnc3EDKGNybGxhYi5taXNjLmluc3RydW1lbnQKU3R1Yk9iamVjdApxBCmBcQV9cQYoWAYAAABrd2FyZ3NxB31xCChYAgAAAHFmcQloBCmBcQp9cQsoaAd9cQxYCAAAAGVudl9zcGVjcQ1jcmxsYWIubWlzYy5pbnN0cnVtZW50ClN0dWJBdHRyCnEOKYFxD31xEChYCgAAAF9hdHRyX25hbWVxEVgEAAAAc3BlY3ESWAQAAABfb2JqcRNoBCmBcRR9cRUoaAd9cRZYAwAAAGVudnEXaAQpgXEYfXEZKGgHfXEaWAgAAABlbnZfbmFtZXEbWBIAAABIb3ZvcmthSW50ZXJ2YWwtdjBxHHNYCwAAAHByb3h5X2NsYXNzcR1jcmxsYWIuZW52cy5neW1fZW52Ckd5bUVudgpxHlgEAAAAYXJnc3EfKXVic2gdY3JsbGFiLmVudnMubm9ybWFsaXplZF9lbnYKTm9ybWFsaXplZEVudgpxIGgfKXVidWJzaB1jcmxsYWIucV9mdW5jdGlvbnMuY29udGludW91c19tbHBfcV9mdW5jdGlvbgpDb250aW51b3VzTUxQUUZ1bmN0aW9uCnEhaB8pdWJYFAAAAHBvbGljeV9sZWFybmluZ19yYXRlcSJHPxo24uscQy1YDwAAAG1heF9wYXRoX2xlbmd0aHEjS2BYCAAAAG5fZXBvY2hzcSRN6ANYDAAAAHNjYWxlX3Jld2FyZHElRz+EeuFHrhR7WAYAAABwb2xpY3lxJmgEKYFxJ31xKChoB31xKShYDAAAAGhpZGRlbl9zaXplc3EqSyBLIIZxK2gNaA4pgXEsfXEtKGgRaBJoE2gUdWJ1aB1jcmxsYWIucG9saWNpZXMuZGV0ZXJtaW5pc3RpY19tbHBfcG9saWN5CkRldGVybWluaXN0aWNNTFBQb2xpY3kKcS5oHyl1YlgIAAAAZGlzY291bnRxL0c/7MzMzMzMzVgNAAAAbWluX3Bvb2xfc2l6ZXEwTRAnaBdoFFgMAAAAZXBvY2hfbGVuZ3RocTFN6ANYCgAAAGJhdGNoX3NpemVxMksgWAIAAABlc3EzaAQpgXE0fXE1KGgHfXE2aA1oDimBcTd9cTgoaBFoEmgTaBR1YnNoHWNybGxhYi5leHBsb3JhdGlvbl9zdHJhdGVnaWVzLm91X3N0cmF0ZWd5Ck9VU3RyYXRlZ3kKcTloHyl1YlgQAAAAcWZfbGVhcm5pbmdfcmF0ZXE6Rz9QYk3S8an8dWgdY3JsbGFiLmFsZ29zLmRkcGcKRERQRwpxO2gfKXViWAUAAAB0cmFpbnE8KX1xPXRxPlgIAAAAX19rd2FyZ3NxP31xQHViLg==",
+  "exp_name": "experiment_2018_08_24_11_05_18_0005",
+  "json_args": {
+    "algo": {
+      "_name": "rllab.algos.ddpg.DDPG",
+      "batch_size": 32,
+      "discount": 0.9,
+      "epoch_length": 1000,
+      "es": {
+        "_name": "rllab.exploration_strategies.ou_strategy.OUStrategy",
+        "env_spec": {
+          "attr": "spec",
+          "obj": {
+            "_name": "rllab.envs.normalized_env.NormalizedEnv",
+            "env": {
+              "_name": "rllab.envs.gym_env.GymEnv",
+              "env_name": "HovorkaInterval-v0"
+            }
+          }
+        }
+      },
+      "max_path_length": 96,
+      "min_pool_size": 10000,
+      "n_epochs": 1000,
+      "policy_learning_rate": 0.0001,
+      "qf": {
+        "_name": "rllab.q_functions.continuous_mlp_q_function.ContinuousMLPQFunction",
+        "env_spec": {
+          "attr": "spec",
+          "obj": {
+            "_name": "rllab.envs.normalized_env.NormalizedEnv",
+            "env": {
+              "_name": "rllab.envs.gym_env.GymEnv",
+              "env_name": "HovorkaInterval-v0"
+            }
+          }
+        }
+      },
+      "qf_learning_rate": 0.001,
+      "scale_reward": 0.01
+    },
+    "env": {
+      "_name": "rllab.envs.normalized_env.NormalizedEnv",
+      "env": {
+        "_name": "rllab.envs.gym_env.GymEnv",
+        "env_name": "HovorkaInterval-v0"
+      }
+    },
+    "policy": {
+      "_name": "rllab.policies.deterministic_mlp_policy.DeterministicMLPPolicy",
+      "env_spec": {
+        "attr": "spec",
+        "obj": {
+          "_name": "rllab.envs.normalized_env.NormalizedEnv",
+          "env": {
+            "_name": "rllab.envs.gym_env.GymEnv",
+            "env_name": "HovorkaInterval-v0"
+          }
+        }
+      },
+      "hidden_sizes": [
+        32,
+        32
+      ]
+    }
+  },
+  "log_dir": ".",
+  "log_tabular_only": false,
+  "n_parallel": 1,
+  "params_log_file": "params.json",
+  "plot": false,
+  "resume_from": null,
+  "seed": 1,
+  "snapshot_gap": 1,
+  "snapshot_mode": "last",
+  "tabular_log_file": "progress.csv",
+  "text_log_file": "debug.log",
+  "use_cloudpickle": false,
+  "variant_data": null,
+  "variant_log_file": "variant.json"
+}

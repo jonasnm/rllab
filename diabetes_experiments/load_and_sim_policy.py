@@ -10,12 +10,13 @@ try:
 except ImportError:
     print('\nConsider installing seaborn for better plotting!')
 
+# def render_and_plot_policy(algorithm, filename, figure_filename, title=None):
 def render_and_plot_policy(filename, figure_filename, title=None):
 
     data = joblib.load(filename)
     policy = data['policy']
     env = data['env']
-    algo = data['algo']
+    # algo = data['algo']
 
     path = rollout(env, policy, max_path_length=96,
                        animated=True, speedup=1, always_return_paths=True)
@@ -39,15 +40,21 @@ def render_and_plot_policy(filename, figure_filename, title=None):
     plt.title('Actions')
 
 
-    hidden_sizes = str(policy.get_param_shapes())
-    if not title:
-         plt.suptitle('Reinforce algorithm, batch size: {}, # iters: {} and gamma: {}. \n NN policy architecture: {}, \n reward fn: {}'.
-                 format(algo.batch_size, algo.n_itr, algo.discount, hidden_sizes, env.wrapped_env.env.env.env.reward_flag))
-    else:
+    # hidden_sizes = str(policy.get_param_shapes())
 
-         plt.suptitle('Reinforce algorithm, batch size: {}, # iters: {}, step size: {}, gamma: {}, init stdev: {}{} \n NN policy architecture: {}, \n reward fn: {}'
-                      .format(title['batch_size'], title['n_itr'], title['step_size'],''.join(str(title['gamma']).split('.')), title['init_std'], title['learn_std'], title['hidden_arc'], title['reward_fun']))
-    # suptitle('Reinforce')
+    # =================================
+    # Modified with simpler title !!
+    # =================================
+    plt.suptitle(title)
+
+    # if not title:
+         # plt.suptitle(algorithm + 'algorithm, batch size: {}, # iters: {} and gamma: {}. \n NN policy architecture: {}, \n reward fn: {}'.
+                 # format(algo.batch_size, algo.n_itr, algo.discount, hidden_sizes, env.wrapped_env.env.env.env.reward_flag))
+    # else:
+
+         # plt.suptitle(algorithm + 'algorithm, batch size: {}, # iters: {}, step size: {}, gamma: {}, init stdev: {}{} \n NN policy architecture: {}, \n reward fn: {}'
+                      # .format(title['batch_size'], title['n_itr'], title['step_size'],''.join(str(title['gamma']).split('.')), title['init_std'], title['learn_std'], title['hidden_arc'], title['reward_fun']))
+    # # suptitle('Reinforce')
     plt.show()
     plt.savefig(str(figure_filename))
 
@@ -56,6 +63,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('filename', help='The parameter file of the policy to be loaded.')
     parser.add_argument('-ff','--figure_filename', help='filename if figure should be saved')
+    parser.add_argument('-t','--title', help='Title of figure')
 
     args = parser.parse_args()
-    render_and_plot_policy(args.filename, args.figure_filename)
+    render_and_plot_policy(args.filename, args.figure_filename, args.title)

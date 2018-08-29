@@ -1,4 +1,5 @@
 from rllab.algos.trpo import TRPO
+from rllab.algos.vpg import VPG
 from rllab.baselines.linear_feature_baseline import LinearFeatureBaseline
 from rllab.envs.gym_env import GymEnv
 from rllab.envs.normalized_env import normalize
@@ -11,26 +12,27 @@ from pylab import plot, figure, show, title, ion, \
 env = normalize(GymEnv('HovorkaInterval-v0'))
 # env = (GymEnv('HovorkaDiabetes-v0'))
 
-env.wrapped_env.env.env.reward_flag = 'gaussian'
+env.wrapped_env.env.env.reward_flag = 'absolute'
 
 policy = GaussianMLPPolicy(
     env_spec=env.spec,
     # The neural network policy should have two hidden layers, each with 32 hidden units.
-    # hidden_sizes=(32, 32),
-    hidden_sizes=(100, 50, 25),
+    hidden_sizes=(32, 32),
+    # hidden_sizes=(100, 50, 25),
     learn_std=True,
-    init_std=.0001
+    init_std=.2
 )
 baseline = LinearFeatureBaseline(env_spec=env.spec)
 
-algo = TRPO(
+# algo = TRPO(
+algo = VPG(
     env=env,
     policy=policy,
     # baseline=baseline,
     baseline=baseline,
-    batch_size=4001,
+    batch_size=5000,
     max_path_length=env.horizon,
-    n_itr=100,
+    n_itr=200,
     # discount=0.80,
     discount=.9,
     step_size=0.01
