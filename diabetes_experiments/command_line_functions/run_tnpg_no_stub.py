@@ -16,7 +16,6 @@ except ImportError:
 # Parsing arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("env", help="The environment name from OpenAIGym environments")
-parser.add_argument("--reward", default='gaussian', help="The reward function from OpenAIGym diabetes environment")
 parser.add_argument("--n_itr", default=200, type=int)
 parser.add_argument("--step_size", default=0.01)
 parser.add_argument("--batch_size", default=5000)
@@ -35,7 +34,6 @@ args = parser.parse_args()
 
 def run_task(*_):
     env = normalize(GymEnv(args.env))
-    env.wrapped_env.env.env.reward_flag = args.reward
 
 
     baseline = LinearFeatureBaseline(env_spec=env.spec)

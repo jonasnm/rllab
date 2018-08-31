@@ -11,7 +11,7 @@ except ImportError:
     print('\nConsider installing seaborn for better plotting!')
 
 # def render_and_plot_policy(algorithm, filename, figure_filename, title=None):
-def render_and_plot_policy(filename, figure_filename, title=None):
+def render_and_plot_policy(filename, figure_filename, title=None, plot_average_return=False):
 
     data = joblib.load(filename)
     policy = data['policy']
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('filename', help='The parameter file of the policy to be loaded.')
     parser.add_argument('-ff','--figure_filename', help='filename if figure should be saved')
-    parser.add_argument('-t','--title', help='Title of figure')
+    parser.add_argument('-t','--title', help='Title of figure', default=None)
 
     args = parser.parse_args()
     render_and_plot_policy(args.filename, args.figure_filename, args.title)

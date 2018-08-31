@@ -35,7 +35,7 @@ python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/ga
 python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian/5000/100_50_25/params.pkl              -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian/5000/100_50_25/ddpg_100_50_25_default.png -t 'ddpg gaussian 100, 50, 25 hidden units'
 
 # Gaussian with insulin
-python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin/5000/8/params.pkl         -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin2/5000/8/ddpg_8_default.png -t 'ddpg gaussian with insulin 8 hidden units'
+python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin/5000/8/params.pkl         -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin/5000/8/ddpg_8_default.png -t 'ddpg gaussian with insulin 8 hidden units'
 python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin/5000/32_32/params.pkl     -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin/5000/32_32/ddpg_32_32_default.png -t 'ddpg gaussian_with_insulin 32, 32 hidden units'
 python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin/5000/100_50_25/params.pkl -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/gaussian_with_insulin/5000/100_50_25/ddpg_100_50_25_default.png -t 'ddpg gaussian with insulin 100, 50, 25 hidden units'
 
@@ -45,6 +45,6 @@ python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/bi
 python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/binary_tight/5000/100_50_25/params.pkl          -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/binary_tight/5000/100_50_25/ddpg_100_50_25_default.png -t 'ddpg binary_tight 100, 50, 25 hidden units'
 
 # absolute
-python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute2/5000/8/params.pkl                     -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute/5000/8/ddpg_8_default.png -t 'ddpg absolute 8 hidden units'
+python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute/5000/8/params.pkl                     -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute/5000/8/ddpg_8_default.png -t 'ddpg absolute 8 hidden units'
 python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute/5000/32_32/params.pkl                  -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute/5000/32_32/ddpg_32_32_default.png -t 'ddpg absolute 32, 32 hidden units'
 python $plot_function_path /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute/5000/100_50_25/params.pkl              -ff /home/jonas/Dropbox/results/jonas_experiments/ddpg/absolute/5000/100_50_25/ddpg_100_50_25_default.png -t 'ddpg absolute 100, 50, 25 hidden units'
