@@ -22,21 +22,40 @@ def render_and_plot_policy(filename, figure_filename, title=None):
                        animated=True, speedup=1, always_return_paths=True)
 
 
-    bg_history = [path['observations'][i][0:29] for i in range(len(path['observations']))]
+    bg_history = [path['observations'][i][0:30] for i in range(len(path['observations']))]
     bg_history = np.concatenate(bg_history).ravel()
+
+    insulin_history = [path['observations'][i][30:] for i in range(len(path['observations']))]
+    insulin_history = np.concatenate(insulin_history).ravel()
 
     plt.figure(figsize=(12.0, 10.0))
     plt.ion()
     plt.subplot(2, 2, 1)
     plt.plot(bg_history)
-    plt.title('Result of running the algorithm')
+    plt.axhline(y=108, color='r')
+    plt.ylim((60,300))
+    plt.ylabel('mg/dL')
+    plt.xlabel('Minutes')
+    plt.title('Blood glucose level')
+
+    plt.subplot(2, 2, 2)
+    plt.plot(insulin_history)
+    plt.ylim((-0.5, 20))
+    plt.ylabel('mU/L')
+    plt.xlabel('Minutes')
+    plt.title('Insulin in the body')
 
     plt.subplot(2, 2, 3)
     plt.plot(path['rewards'])
+    plt.ylim((-1.5, 1.5))
+    plt.xlabel('Number of actions')
     plt.title('Reward')
 
     plt.subplot(2, 2, 4)
     plt.plot(path['actions'])
+    plt.ylim((-1.5, 1.5))
+    plt.ylabel('mU/min (normalized)')
+    plt.xlabel('Number of actions')
     plt.title('Actions')
 
 
