@@ -55,8 +55,8 @@ RUN git clone -b jonas-experimental https://github.com/jonasnm/gym.git /root/git
 ENV PYTHONPATH /root/git/rllab:$PYTHONPATH
 ENV PATH /opt/conda/envs/rllab3/bin:$PATH
 
-RUN echo "source activate rllab3" >> /root/.bashrc
-ENV BASH_ENV /root/.bashrc
+#RUN echo "source activate rllab3" >> /root/.bashrc
+#ENV BASH_ENV /root/.bashrc
 #RUN ./root/git/rllab/scripts/setup_linux.sh
 RUN pip install -e /root/git/gym/
 WORKDIR /root/code
