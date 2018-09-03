@@ -20,7 +20,8 @@ except ImportError:
 
 # models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0', 'HovorkaHovorka-v0')
 # models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
-models = ('HovorkaRandomAbsolute-v0', 'HovorkaRandomBinary-v0', 'HovorkaRandomGaussian-v0', 'HovorkaRandomGaussianInsulin-v0')
+# models = ('HovorkaRandomAbsolute-v0', 'HovorkaRandomBinary-v0', 'HovorkaRandomGaussian-v0', 'HovorkaRandomGaussianInsulin-v0')
+models = ('HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
 NN_sizes = ((8,), (32, 32), (100, 50, 25))
 
 for k in range(len(models)):
