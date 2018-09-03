@@ -68,9 +68,9 @@ ENV THEANO_FLAGS mode=FAST_RUN,device=cpu,floatX=float32
 # Downgrading Lasagne due to theano compatibility issue
 run pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
 
-COPY ./conda_script.sh /root/code/
-RUN chmod +x /root/code/conda_script.sh
-RUN /root/code/conda_script.sh
+#COPY ./conda_script.sh /root/code/
+#RUN chmod +x /root/code/conda_script.sh
+#RUN /root/code/conda_script.sh
 
 # Changing to nomkl
 #RUN conda install nomkl numpy scipy scikit-learn numexpr
