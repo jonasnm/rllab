@@ -1,4 +1,3 @@
-from rllab.sampler.utils import rollout
 import matplotlib.pyplot as plt
 import numpy as np
 import argparse
@@ -31,9 +30,15 @@ def plot_training_progress(filename, figure_filename=None, title=None):
     else:
         plt.title('Average return during training')
 
-    plt.show()
+    # plt.show()
 
-    plt.savefig(str(figure_filename))
+    if figure_filename is not None:
+        plt.savefig(str(figure_filename))
+    else:
+        figure_filename = filename.replace('/','_')
+        figure_filename = figure_filename.replace('.csv','.png')
+        plt.savefig(str(figure_filename))
+
 
 if __name__ == "__main__":
     # Parsing input arguments
