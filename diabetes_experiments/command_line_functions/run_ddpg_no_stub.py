@@ -18,12 +18,12 @@ except ImportError:
 parser = argparse.ArgumentParser()
 parser.add_argument("env", help="The environment name from OpenAIGym environments")
 parser.add_argument("--reward", default='gaussian', help="The reward function from OpenAIGym diabetes environment")
-parser.add_argument("--n_itr", default=200, type=int)
+parser.add_argument("--n_itr", default=1000, type=int)
 parser.add_argument("--batch_size", default=1000)
 parser.add_argument("--gamma", default=.9)
-parser.add_argument("--hidden_sizes", default=1, type=int)
+parser.add_argument("--hidden_sizes", default=3, type=int)
 parser.add_argument("--data_dir", default="./data_ddpg/")
-parser.add_argument("--scale_reward", default=0.01)
+parser.add_argument("--scale_reward", default=0.1)
 parser.add_argument("--init_std", default=1)
 
 args = parser.parse_args()
@@ -38,6 +38,8 @@ def run_task(*_):
         hidden_sizes=(32, 32)
     elif args.hidden_sizes == 2:
         hidden_sizes=(100, 50, 25)
+    elif args.hidden_sizes == 3:
+        hidden_sizes=(400, 300)
 
     policy = DeterministicMLPPolicy(
         env_spec=env.spec,
@@ -54,7 +56,7 @@ def run_task(*_):
         policy=policy,
         es=es,
         qf=qf,
-        batch_size=32,
+        batch_size=64,
         max_path_length=95,
         epoch_length=args.batch_size,
         min_pool_size=10000,
