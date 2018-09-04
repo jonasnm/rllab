@@ -90,8 +90,14 @@ for k in range(len(models)):
             run_task,
             # algo.train(),
             log_dir=log_dir,
+<<<<<<< HEAD
             n_parallel=2,
             # n_parallel=1,
+=======
+            # n_parallel=2,
+            n_parallel=1,
+            use_gpu=True,
+>>>>>>> ee985ae013aeef00b072f75890fa9647ce73fb55
             # Only keep the snapshot parameters for the last iteration
             snapshot_mode="last",
             # Specifies the seed for the experiment. If this is not provided, a random seed
