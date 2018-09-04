@@ -90,6 +90,7 @@ for k in range(len(models)):
             log_dir=log_dir,
             # n_parallel=2,
             n_parallel=1,
+            use_gpu=True,
             # Only keep the snapshot parameters for the last iteration
             snapshot_mode="last",
             # Specifies the seed for the experiment. If this is not provided, a random seed
