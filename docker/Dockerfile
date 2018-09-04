@@ -24,12 +24,11 @@ ENV LANG C.UTF-8
 ENTRYPOINT [ "/usr/bin/tini", "--" ]
 
 # ========== Special Deps ==========
-RUN apt-get -y install git make cmake unzip
+RUN apt-get -y install git make cmake unzip swig build-essential zlib1g-dev
 RUN pip install awscli
 # ALE requires zlib
-RUN apt-get -y install zlib1g-dev
 # MUJOCO requires graphics stuff (Why?)
-RUN apt-get -y build-dep glfw
+RUN apt-get -y build-dep glfw python-scipy
 RUN apt-get -y install libxrandr2 libxinerama-dev libxi6 libxcursor-dev
 # copied from requirements.txt
 #RUN pip install imageio tabulate nose
@@ -56,9 +55,9 @@ RUN git clone -b jonas-experimental https://github.com/jonasnm/gym.git /root/git
 ENV PYTHONPATH /root/git/rllab:$PYTHONPATH
 ENV PATH /opt/conda/envs/rllab3/bin:$PATH
 
-RUN echo "source activate rllab3" >> /root/.bashrc
-ENV BASH_ENV /root/.bashrc
-RUN ./root/git/rllab/scripts/setup_linux.sh
+#RUN echo "source activate rllab3" >> /root/.bashrc
+#ENV BASH_ENV /root/.bashrc
+#RUN ./root/git/rllab/scripts/setup_linux.sh
 RUN pip install -e /root/git/gym/
 WORKDIR /root/code
 
