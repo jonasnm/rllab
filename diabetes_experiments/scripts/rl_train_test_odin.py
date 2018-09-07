@@ -83,7 +83,7 @@ for k in range(len(models)):
         NN_folder = [str(j) for j in NN_sizes[i]]
         NN_folder = '_'.join(NN_folder)
 
-        log_dir = 'C:Users/Miguel/Dropbox/results/miguel_experiments/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
+        log_dir = 'miguel_experiments/bg_action_state/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
         # log_dir = './'
         # Running and saving the experiment
         run_experiment_lite(
@@ -102,7 +102,7 @@ for k in range(len(models)):
         )
 
         ## Testing the policy
-        data_dir = 'C:Users/Miguel/Dropbox/results/miguel_experiments/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
+        data_dir = 'miguel_experiments/bg_action_state/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
         filename = log_dir + '/params.pkl'
         figure_filename = data_dir + '.png'
         title = RL + '_' + models[k] + '_' + NN_folder
