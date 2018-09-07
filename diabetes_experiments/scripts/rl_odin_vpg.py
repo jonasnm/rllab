@@ -2,7 +2,7 @@
 import matplotlib
 matplotlib.use('agg')
 
-from rllab.algos.trpo import TRPO
+from rllab.algos.vpg import VPG
 from rllab.baselines.linear_feature_baseline import LinearFeatureBaseline
 from rllab.envs.gym_env import GymEnv
 from rllab.envs.normalized_env import normalize
@@ -16,7 +16,7 @@ from load_and_sim_policy import render_and_plot_policy
 THEANO_FLAGS = 'floatX=float32, device=cuda, mode=fast_run'
 
 # File name for saving
-RL = 'TRPO'
+RL = 'VPG'
 
 try:
     import seaborn as sns
@@ -25,9 +25,9 @@ except ImportError:
     print('\nConsider installing seaborn (pip install seaborn) for better plotting!')
 
 # models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0', 'HovorkaHovorka-v0')
-# models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
+models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
 # models = ('HovorkaRandomAbsolute-v0', 'HovorkaRandomBinary-v0', 'HovorkaRandomGaussian-v0', 'HovorkaRandomGaussianInsulin-v0')
-models = ('HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
+# models = ('HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
 # NN_sizes = ((8,), (32, 32), (100, 50, 25))
 NN_sizes = ((32, 32), (100, 50, 25))
 
@@ -68,7 +68,7 @@ for k in range(len(models)):
             step_size = 0.01
             # max_path_length = 96,
 
-            algo = TRPO(
+            algo = VPG(
                 env=env,
                 policy=policy,
                 baseline=baseline,
@@ -102,7 +102,7 @@ for k in range(len(models)):
         )
 
         ## Testing the policy
-        data_dir = 'miguel_experiments/bg_action_state/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
+        data_dir = 'miguel_experiments/week/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
         filename = log_dir + '/params.pkl'
         figure_filename = data_dir + '.png'
         title = RL + '_' + models[k] + '_' + NN_folder

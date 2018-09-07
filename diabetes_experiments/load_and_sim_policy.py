@@ -18,7 +18,7 @@ def render_and_plot_policy(filename, figure_filename, title=None, plot_average_r
     env = data['env']
     # algo = data['algo']
 
-    path = rollout(env, policy, max_path_length=96,
+    path = rollout(env, policy, max_path_length=336,
                        animated=True, speedup=1, always_return_paths=True)
 
 
@@ -40,7 +40,7 @@ def render_and_plot_policy(filename, figure_filename, title=None, plot_average_r
 
     plt.subplot(2, 2, 2)
     plt.plot(insulin_history)
-    plt.ylim((-0.5, 20))
+    plt.ylim((-0.5, 305))
     plt.ylabel('mU/L')
     plt.xlabel('Minutes')
     plt.title('Insulin in the body')
