@@ -18,7 +18,7 @@ def render_and_plot_policy(filename, figure_filename, title=None, plot_average_r
     env = data['env']
     # algo = data['algo']
 
-    path = rollout(env, policy, max_path_length=48,
+    path = rollout(env, policy, max_path_length=96,
                        animated=True, speedup=1, always_return_paths=True)
 
 
