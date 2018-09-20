@@ -5,8 +5,8 @@ from rllab.envs.normalized_env import normalize
 from rllab.policies.gaussian_mlp_policy import GaussianMLPPolicy
 from rllab.misc.instrument import run_experiment_lite
 import sys
-# sys.path.insert(0, '/home/jonas/Documents/git/EXTERNAL/rllab_fork/diabetes_experiments/')
-sys.path.insert(0, '/Users/jonas/Documents/git/rllab/diabetes_experiments/')
+sys.path.insert(0, '/home/jonas/Documents/git/EXTERNAL/rllab_fork/diabetes_experiments/')
+# sys.path.insert(0, '/Users/jonas/Documents/git/rllab/diabetes_experiments/')
 from load_and_sim_policy import render_and_plot_policy
 
 # File name for saving
