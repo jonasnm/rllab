@@ -1,4 +1,4 @@
-from rllab.algos.trpo import TRPO
+from rllab.algos.vpg import VPG
 from rllab.baselines.linear_feature_baseline import LinearFeatureBaseline
 from rllab.envs.gym_env import GymEnv
 from rllab.envs.normalized_env import normalize
@@ -10,7 +10,7 @@ sys.path.insert(0, '/Users/jonas/Documents/git/rllab/diabetes_experiments/')
 from load_and_sim_policy import render_and_plot_policy
 
 # File name for saving
-RL = 'TRPO'
+RL = 'VPG'
 
 try:
     import seaborn as sns
@@ -60,7 +60,7 @@ for k in range(len(models)):
             step_size = 0.01
             # max_path_length = 96,
 
-            algo = TRPO(
+            algo = VPG(
                 env=env,
                 policy=policy,
                 baseline=baseline,
