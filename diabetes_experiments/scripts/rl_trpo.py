@@ -6,7 +6,7 @@ from rllab.envs.normalized_env import normalize
 from rllab.policies.gaussian_mlp_policy import GaussianMLPPolicy
 from rllab.misc.instrument import run_experiment_lite
 import sys
-sys.path.insert(0, '/home/jonas/Documents/git/EXTERNAL/rllab_fork/diabetes_experiments/')
+sys.path.insert(0, '/Users/jonas/Documents/git/rllab/diabetes_experiments/')
 # sys.path.insert(0, '/home/jonas/Documents/git/rllab/diabetes_experiments/')
 from load_and_sim_policy import render_and_plot_policy
 from plot_training_progress import plot_training_progress
@@ -90,7 +90,7 @@ for k in range(len(models)):
         # NN_folder = '_'.join(NN_folder)
         NN_folder = '100_50_25'
 
-        log_dir = '/home/jonas/Dropbox/results/cambridge_model_random/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
+        log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
         # log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
         # log_dir = './'
         # Running and saving the experiment
@@ -110,7 +110,7 @@ for k in range(len(models)):
         )
 
         ## Testing the policy
-        data_dir = '/home/jonas/Dropbox/results/cambridge_model_random/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
+        data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
 
         # data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
 
@@ -121,4 +121,4 @@ for k in range(len(models)):
         render_and_plot_policy(filename, figure_filename, title)
 
         # TODO: Add training progress!
-        plot_training_progress(filename, figure_filename, title + 'training progress')
+        plot_training_progress(log_dir + '/progress.csv', data_dir + 'training_progress.png', title + 'training progress')
