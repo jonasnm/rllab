@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 # from rllab.algos.vpg import VPG
-=======
->>>>>>> 156c9e20e9c4a6629483170d0a52d9bd0a508540
 from rllab.algos.trpo import TRPO
 from rllab.baselines.linear_feature_baseline import LinearFeatureBaseline
 from rllab.envs.gym_env import GymEnv
@@ -12,12 +9,9 @@ import sys
 sys.path.insert(0, '/home/jonas/Documents/git/EXTERNAL/rllab_fork/diabetes_experiments/')
 # sys.path.insert(0, '/home/jonas/Documents/git/rllab/diabetes_experiments/')
 from load_and_sim_policy import render_and_plot_policy
+from plot_training_progress import plot_training_progress
 
 # File name for saving
-<<<<<<< HEAD
-# RL = 'VPG'
-=======
->>>>>>> 156c9e20e9c4a6629483170d0a52d9bd0a508540
 RL = 'TRPO'
 
 try:
@@ -26,21 +20,20 @@ try:
 except ImportError:
     print('\nConsider installing seaborn (pip install seaborn) for better plotting!')
 
-<<<<<<< HEAD
 # models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0', 'HovorkaHovorka-v0')
 # models = ('HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
 models = ('CambridgeAbsolute-v0','CambridgeBinary-v0', 'CambridgeGaussian-v0', 'CambridgeGaussianInsulin-v0')
 # models = ('HovorkaRandomAbsolute-v0', 'HovorkaRandomBinary-v0', 'HovorkaRandomGaussian-v0', 'HovorkaRandomGaussianInsulin-v0')
 # models = ('HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
 # models = ('HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
+
 # NN_sizes = ((8,), (32, 32), (100, 50, 25))
 # NN_sizes = ((32, 32), (100, 50, 25))
-=======
+
 # models = ('HovorkaMealsGaussian-v0', 'HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussianInsulin-v0')
-models = ('CambridgeMealsGaussian-v0', 'CambridgeMealsAbsolute-v0', 'CambridgeMealsBinary-v0', 'CambridgeMealsGaussianInsulin-v0')
+# models = ('CambridgeMealsGaussian-v0', 'CambridgeMealsAbsolute-v0', 'CambridgeMealsBinary-v0', 'CambridgeMealsGaussianInsulin-v0')
 # NN_sizes = ((8,), (32, 32), (100, 50, 25))
 NN_sizes = ((100, 50, 25), (32, 32))
->>>>>>> 156c9e20e9c4a6629483170d0a52d9bd0a508540
 
 for k in range(len(models)):
     # for i in range(len(NN_sizes)):
@@ -80,10 +73,7 @@ for k in range(len(models)):
             step_size = 0.01
             # max_path_length = 96,
 
-<<<<<<< HEAD
             # algo = VPG(
-=======
->>>>>>> 156c9e20e9c4a6629483170d0a52d9bd0a508540
             algo = TRPO(
                 env=env,
                 policy=policy,
@@ -100,11 +90,8 @@ for k in range(len(models)):
         # NN_folder = '_'.join(NN_folder)
         NN_folder = '100_50_25'
 
-<<<<<<< HEAD
         log_dir = '/home/jonas/Dropbox/results/cambridge_model_random/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
-=======
-        log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
->>>>>>> 156c9e20e9c4a6629483170d0a52d9bd0a508540
+        # log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
         # log_dir = './'
         # Running and saving the experiment
         run_experiment_lite(
@@ -123,11 +110,10 @@ for k in range(len(models)):
         )
 
         ## Testing the policy
-<<<<<<< HEAD
         data_dir = '/home/jonas/Dropbox/results/cambridge_model_random/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
-=======
-        data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
->>>>>>> 156c9e20e9c4a6629483170d0a52d9bd0a508540
+
+        # data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
+
         filename = log_dir + '/params.pkl'
         figure_filename = data_dir + '.png'
         title = RL + '_' + models[k] + '_' + NN_folder
@@ -135,3 +121,4 @@ for k in range(len(models)):
         render_and_plot_policy(filename, figure_filename, title)
 
         # TODO: Add training progress!
+        plot_training_progress(filename, figure_filename, title + 'training progress')
