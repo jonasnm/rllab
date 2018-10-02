@@ -28,22 +28,28 @@ def render_and_plot_policy(filename, figure_filename, title=None, plot_average_r
     insulin_history = [path['observations'][i][30:] for i in range(len(path['observations']))]
     insulin_history = np.concatenate(insulin_history).ravel()
 
+    basal_rate = insulin_history[np.arange(3, len(insulin_history), 4)]
+    basal_index = np.arange(0, 1440, 30)
+
     plt.figure(figsize=(12.0, 10.0))
     plt.ion()
     plt.subplot(2, 2, 1)
     plt.plot(bg_history)
     plt.axhline(y=108, color='r')
+    plt.axhline(y=180, color='yellow')
+    plt.axhspan(80, 130, alpha=0.1, color='green')
     plt.ylim((60,300))
     plt.ylabel('mg/dL')
     plt.xlabel('Minutes')
     plt.title('Blood glucose level')
 
     plt.subplot(2, 2, 2)
-    plt.plot(insulin_history)
-    plt.ylim((-0.5, 305))
+    # plt.plot(insulin_history)
+    plt.step(basal_index, basal_rate)
+    plt.ylim((-0.5, 55))
     plt.ylabel('mU/L')
     plt.xlabel('Minutes')
-    plt.title('Insulin in the body')
+    plt.title('Insulin basal rate')
 
     plt.subplot(2, 2, 3)
     plt.plot(path['rewards'])
