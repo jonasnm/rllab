@@ -107,7 +107,7 @@ for k in range(len(models)):
         figure_filename = data_dir + '.png'
         title = RL + '_' + models[k] + '_' + NN_folder
 
-        render_andarti_plot_policy(filename, figure_filename, title)
+        render_and_plot_policy(filename, figure_filename, title)
 
         # TODO: Add training progress!
         plot_training_progress(log_dir + '/progress.csv', data_dir + 'training_progress.png', title + 'training progress')
