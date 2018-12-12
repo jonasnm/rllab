@@ -1,5 +1,5 @@
 # from rllab.algos.vpg import VPG
-from rllab.algos.vpg import VPG
+from rllab.algos.trpo import TRPO
 from rllab.baselines.linear_feature_baseline import LinearFeatureBaseline
 from rllab.envs.gym_env import GymEnv
 from rllab.envs.normalized_env import normalize
@@ -12,7 +12,7 @@ from load_and_sim_policy import render_and_plot_policy
 from plot_training_progress import plot_training_progress
 
 # File name for saving
-RL = 'VPG'
+RL = 'TRPO'
 
 try:
     import seaborn as sns
@@ -20,19 +20,11 @@ try:
 except ImportError:
     print('\nConsider installing seaborn (pip install seaborn) for better plotting!')
 
-# models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0', 'HovorkaHovorka-v0')
-# models = ('HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
-models = ('CambridgeAbsolute-v0','CambridgeBinary-v0', 'CambridgeGaussian-v0', 'CambridgeGaussianInsulin-v0')
-# models = ('HovorkaRandomAbsolute-v0', 'HovorkaRandomBinary-v0', 'HovorkaRandomGaussian-v0', 'HovorkaRandomGaussianInsulin-v0')
-# models = ('HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
-# models = ('HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
+models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
+# models = ('CambridgeAbsolute-v0','CambridgeBinary-v0', 'CambridgeGaussian-v0', 'CambridgeGaussianInsulin-v0')
 
 # NN_sizes = ((8,), (32, 32), (100, 50, 25))
 # NN_sizes = ((32, 32), (100, 50, 25))
-
-# models = ('HovorkaMealsGaussian-v0', 'HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussianInsulin-v0')
-# models = ('CambridgeMealsGaussian-v0', 'CambridgeMealsAbsolute-v0', 'CambridgeMealsBinary-v0', 'CambridgeMealsGaussianInsulin-v0')
-# NN_sizes = ((8,), (32, 32), (100, 50, 25))
 NN_sizes = ((100, 50, 25), (32, 32))
 
 for k in range(len(models)):
@@ -74,7 +66,7 @@ for k in range(len(models)):
             # max_path_length = 96,
 
             # algo = VPG(
-            algo = VPG(
+            algo = TRPO(
                 env=env,
                 policy=policy,
                 baseline=baseline,
@@ -90,8 +82,7 @@ for k in range(len(models)):
         # NN_folder = '_'.join(NN_folder)
         NN_folder = '100_50_25'
 
-        log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + 'subject_6' + '/' + models[k]
-        # log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
+        log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/hovorkaCGM/' + RL + '/' + models[k]
         # log_dir = './'
         # Running and saving the experiment
         run_experiment_lite(
@@ -110,9 +101,7 @@ for k in range(len(models)):
         )
 
         ## Testing the policy
-        data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + 'subject_6' + '/' + models[k] + '/' + RL + '_default'
-
-        # data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
+        data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/hovorkaCGM/' + RL + '/' + models[k] + '/' + RL + '_default'
 
         filename = log_dir + '/params.pkl'
         figure_filename = data_dir + '.png'
