@@ -6,8 +6,9 @@ from rllab.envs.normalized_env import normalize
 from rllab.policies.gaussian_mlp_policy import GaussianMLPPolicy
 from rllab.misc.instrument import run_experiment_lite
 import sys
-sys.path.insert(0, '/Users/jonas/Documents/git/rllab/diabetes_experiments/')
-# sys.path.insert(0, '/home/jonas/Documents/git/rllab/diabetes_experiments/')
+# sys.path.insert(0, '/Users/jonas/Documents/git/rllab/diabetes_experiments/')
+sys.path.insert(0, '/home/jonas/Documents/git/EXTERNAL/rllab_fork/diabetes_experiments/')
+
 from load_and_sim_policy import render_and_plot_policy
 from plot_training_progress import plot_training_progress
 
@@ -21,8 +22,9 @@ except ImportError:
     print('\nConsider installing seaborn (pip install seaborn) for better plotting!')
 
 # models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0', 'HovorkaHovorka-v0')
-# models = ('HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
-models = ('CambridgeAbsolute-v0','CambridgeBinary-v0', 'CambridgeGaussian-v0', 'CambridgeGaussianInsulin-v0')
+# models = ('HovorkaAbsolute-v0', 'HovorkaBinary-v0', 'HovorkaGaussian-v0', 'HovorkaGaussianInsulin-v0')
+models = ('HovorkaBinary-v0','HovorkaGaussian-v0')
+# models = ('CambridgeAbsolute-v0','CambridgeBinary-v0', 'CambridgeGaussian-v0', 'CambridgeGaussianInsulin-v0')
 # models = ('HovorkaRandomAbsolute-v0', 'HovorkaRandomBinary-v0', 'HovorkaRandomGaussian-v0', 'HovorkaRandomGaussianInsulin-v0')
 # models = ('HovorkaMealsAbsolute-v0', 'HovorkaMealsBinary-v0', 'HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
 # models = ('HovorkaMealsGaussian-v0', 'HovorkaMealsGaussianInsulin-v0')
@@ -90,9 +92,9 @@ for k in range(len(models)):
         # NN_folder = '_'.join(NN_folder)
         NN_folder = '100_50_25'
 
-        log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + 'subject_6' + '/' + models[k]
-        # log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder
-        # log_dir = './'
+        # log_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + 'subject_6' + '/' + models[k]
+        # log_dir = '/home/jonas/Dropbox/results/attd_final_attempt/' + RL + '/' + models[k]
+        log_dir = './'
         # Running and saving the experiment
         run_experiment_lite(
             run_task,
@@ -110,7 +112,9 @@ for k in range(len(models)):
         )
 
         ## Testing the policy
-        data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + 'subject_6' + '/' + models[k] + '/' + RL + '_default'
+        # data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + 'subject_6' + '/' + models[k] + '/' + RL + '_default'
+        # data_dir = '/home/jonas/Dropbox/results/attd_final_attempt/' + RL + '/' + models[k] + '/' + RL + '_default'
+        data_dir = './'
 
         # data_dir = '/Users/jonas/Dropbox/results/miguel_experiments/cambridge/' + RL + '/' + models[k] + '/' + '5000' + '/' + NN_folder + '/' + RL + '_default'
 
@@ -118,7 +122,7 @@ for k in range(len(models)):
         figure_filename = data_dir + '.png'
         title = RL + '_' + models[k] + '_' + NN_folder
 
-        render_andarti_plot_policy(filename, figure_filename, title)
+        # render_and_plot_policy(filename, figure_filename, title)
 
         # TODO: Add training progress!
-        plot_training_progress(log_dir + '/progress.csv', data_dir + 'training_progress.png', title + 'training progress')
+        # plot_training_progress(log_dir + '/progress.csv', data_dir + 'training_progress.png', title + 'training progress')
