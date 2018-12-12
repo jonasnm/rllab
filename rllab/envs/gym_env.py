@@ -116,7 +116,8 @@ class GymEnv(Env, Serializable):
         return Step(next_obs, reward, done, **info)
 
     def render(self):
-        self.env.render()
+        # self.env.render()
+        return None
 
     def terminate(self):
         if self.monitoring:
